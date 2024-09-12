@@ -29,7 +29,8 @@ node index
 ## Three Principles
 
 - Maintain our application state in a single object which would be managed by the Redux store
-- To update the state of your app, you need to let Redux know about that with an action. Not allowed to directly update the state object
+- To update the state of your app, you need to let Redux know about that with an action. Not allowed to directly update the state object.
+
 This is a action in code 
 ```JAVA
 {
