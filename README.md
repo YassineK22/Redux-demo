@@ -19,3 +19,9 @@ To run the code "index" is the name of the JS file
 ```bash
 node index
 ```
+
+## Three Core Concepts
+
+- Store : Holds the state of your applciation
+- Action : Describes what happened
+- Reducer : Ties the store and actions together
