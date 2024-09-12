@@ -109,6 +109,6 @@ actions.orderCake()
 actions.orderCake()
 actions.restockCake(3)
 actions.orderIceCream(2)
-actions.restockCake(2)
+actions.restockIceCream(2)
 
 unsubscribe()
