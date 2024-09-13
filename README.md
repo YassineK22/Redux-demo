@@ -32,7 +32,7 @@ node index
 - To update the state of your app, you need to let Redux know about that with an action. Not allowed to directly update the state object.
 
 This is a action in code 
-```JAVA
+```javascript
 {
     type: `Action`
 }
