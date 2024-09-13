@@ -1,5 +1,9 @@
 const redux = require('redux')
+const thunkMiddleware = require('redux-thunk').thunk
+const axios = require('axios')
 const createStore = redux.createStore
+const applyMiddleware = redux.applyMiddleware
+
 const produce = require('immer').produce
 
 const initialState = {
@@ -44,13 +48,34 @@ const reducer = (state = initialState, action) => {
                     draft.users = action.payload,
                     draft.error = ''
             })
-        case FETCH_USERS_FAILED:
-            return produce(state, (draft) => {
-                draft.loding = false,
-                    draft.error = error
-            })
-
+            case FETCH_USERS_FAILED:
+                return produce(state, (draft) => {
+                    draft.loding = false,
+                    draft.error = action.payload
+                })           
     }
 }
 
-const store = createStore(reducer)
+const fetchUsers = () => {
+    return function (dispatch) {
+        dispatch(fetchUsersRequest())
+        axios
+            .get('https://jsonplaceholder.typicode.com/users')
+            .then((response) => {
+                //response.data is the users
+                const users = response.data.map((user) => user.id)
+                dispatch(fetchUsersSuccess(users))
+            })
+            .catch((error) => {
+                //error.message is the error message
+                dispatch(fetchUsersFailure(error.message))
+            })
+    }
+}
+
+const store = createStore(reducer, applyMiddleware(thunkMiddleware)) 
+
+store.subscribe(()=> {
+    console.log(store.getState())
+})
+store.dispatch(fetchUsers())
